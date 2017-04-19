@@ -2,33 +2,42 @@
 #define NUM 100
 #define LOL 30
 
-float x[NUM];
-float y[NUM];
+int b[LOL];
+int c[LOL];
 
-float b[LOL];
-float c[LOL];
+int m[LOL];
+int n[LOL];
 
-float m[LOL];
-float n[LOL];
+int p[LOL];
+int q[LOL];
 
-float p[LOL];
-float q[LOL];
+int x[NUM];
+int y[NUM];
+int radius[NUM];
 
-float radius[NUM];
-
-int red[NUM]; //Red成分
-int green[NUM]; //Green成分
+int red[NUM];
+int green[NUM];
 int blue[NUM];
 
+int r[NUM];
+int g[NUM];
+int u[NUM];
+
+/*
+int w = ofGetWidth();
+int h = ofGetHeight();
+*/
+
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup()
+   {
+    
     ofBackground(255,255,255);
     ofSetCircleResolution(64);
     ofEnableAlphaBlending();
     
-   
-    
-    for( int i = 0; i < NUM; i++){
+    for( int i = 0; i < NUM; i++)
+        {
         x[i] = ofRandom(0, ofGetWidth()/2+100);
         y[i] = ofRandom(0, ofGetHeight()/2+100);
         radius[i] = ofRandom(10, 40);
@@ -36,21 +45,25 @@ void ofApp::setup(){
         red[i] = ofRandom(0, 255);
         green[i] = ofRandom(0, 255);
         blue[i] = ofRandom(0, 255);
-    }
+        
+        r[i] = ofRandom(127, 255);
+        g[i] = ofRandom(127, 255);
+        u[i] = ofRandom(127, 255);
+        }
    
-    for(int i = 0; i < LOL; i++){
+    for(int i = 0; i < LOL; i++)
+        {
+        b[i] = ofRandom(200, ofGetWidth());
+        c[i] = ofRandom(200, ofGetHeight());
     
-    b[i] = ofRandom(200, ofGetWidth());
-    c[i] = ofRandom(200, ofGetHeight());
+        m[i] = ofRandom(200, ofGetWidth());
+        n[i] = ofRandom(200, ofGetHeight());
     
-    m[i] = ofRandom(200, ofGetWidth());
-    n[i] = ofRandom(200, ofGetHeight());
-    
-    p[i] = ofRandom(200, ofGetWidth());
-    q[i] = ofRandom(200, ofGetHeight());
-    }
+        p[i] = ofRandom(200, ofGetWidth());
+        q[i] = ofRandom(200, ofGetHeight());
+        }
 
-}
+    }
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -58,60 +71,46 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-    
-    
+void ofApp::draw()
+   {
     
     ofSetColor(0,0,0);
     ofDrawTriangle(ofGetWidth(), 0, 0, ofGetHeight(), ofGetWidth(), ofGetHeight());
     
-    for(int i = 0; i <LOL; i++){
+    for(int i = 0; i <LOL; i++)
+        {
         ofSetColor(red[i], green[i], blue[i],127);
-        ofDrawTriangle(b[i], c[i],m[i] , n[i],p[i] , q[i]);
-    }
+        ofDrawTriangle(b[i], c[i], m[i], n[i], p[i], q[i]);
+         }
 
-    
     ofSetColor(255,255,255);
     ofDrawTriangle(0, 0, ofGetWidth(), 0, 0, ofGetHeight());
-
     
-    ofSetColor(255, 165, 0);
+    ofSetColor(255, 165, 0, 235);
+   // ofColor::fromHsb(255, 100, 100); ←使い方間違えてる???????
+    
     ofDrawCircle(ofGetWidth()/2 , ofGetHeight()/2, 150);
     
-    
-    for(int i = 0; i < NUM; i++){
-        ofSetColor(red[i], green[i], blue[i]);
+    for(int i = 0; i < NUM; i++)
+         {
+        ofSetColor(r[i], g[i], u[i],127);
         ofDrawCircle(x[i] , y[i], radius[i]);
+         }
+    
     }
-    
-    
-
-    /*
-    ofSetColor(0,0,0);
-    ofDrawTriangle(ofGetWidth(), 0, 0, ofGetHeight(), ofGetWidth(), ofGetHeight());
-     
-    ofSetColor(255,255,255);
-    ofDrawTriangle(0, 0, ofGetWidth(), 0, 0, ofGetHeight());
-*/
-    
-
-    
-   
-    
-    
-
-}
 
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key)
+   {
     
-    if(key == 'x'){
+    if(key == 'x')
+        {
         grabbedImage.grabScreen(0,0,600,600);
         grabbedImage.saveImage("hazama.png");
-    }
+        }
 
-}
+    }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
